@@ -1,0 +1,23 @@
+---
+- name: Configurando repositorio do puppet .deb
+  get_url:
+    url: https://apt.puppetlabs.com/puppet5-release-xenial.deb
+    dest: /tmp/puppet.deb
+  when: ansible_distribution == "Ubuntu"
+
+- name: Instalando repositorio
+  apt:
+    deb: /tmp/puppet.deb
+  when: ansible_distribution == "Ubuntu"
+
+- name: Configurando repositorio do puppet .rpm
+  get_url:
+    url: https://yum.puppet.com/puppet5/puppet5-release-el-7.noarch.rpm
+    dest: /tmp/puppet.rpm
+  when: ansible_distribution == "CentOS"
+
+- name: Instalando repositorio
+  yum: 
+    #enablerepo: /tmp/puppet.rpm
+    name: /tmp/puppet.rpm
+  when: ansible_distribution == "CentOS"

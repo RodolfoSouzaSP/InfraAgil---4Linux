@@ -1,0 +1,7 @@
+---
+# tasks file for puppet
+- name: Instalacao do Puppet
+  hosts: all
+  tasks:
+    - include: prerequisitos.yml
+    - include: install_puppet.yml
