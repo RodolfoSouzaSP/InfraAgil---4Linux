@@ -1,0 +1,47 @@
+---
+- name: deploy app
+  hosts: centos
+  tasks:
+  - name: verificar ambiente em producao
+    command: test -f /etc/nginx/conf.d/green.conf
+    register: ambiente
+    ignore_errors: True
+
+  - name: pega ip container green
+    command: docker exec green hostname -I
+    register: ipgreen
+    when: ambiente.rc == 1
+
+  - name: pega ip container blue
+    command: docker exec blue hostname -I
+    register: ipblue
+    when: ambiente.rc == 0
+
+  - name: deploy ambiente blue
+    template:
+      src: files/blue.conf
+      dest: /etc/nginx/conf.d/blue.conf
+    when: ambiente.rc == 0
+
+  - name: removendo ambiente green
+    file:
+      path: /etc/nginx/conf.d/green.conf
+      state: absent
+    when: ambiente.rc == 0
+
+  - name: deploy ambiente green
+    template:
+      src: files/green.conf
+      dest: /etc/nginx/conf.d/green.conf
+    when: ambiente.rc == 1
+
+  - name: removendo ambiente blue
+    file:
+      path: /etc/nginx/conf.d/blue.conf
+      state: absent
+    when: ambiente.rc == 1
+
+  - name: restart nginx
+    service:
+      name: nginx
+      state: restarted

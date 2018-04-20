@@ -1,0 +1,59 @@
+---
+- name: Instalacao de pacotes base
+  hosts: centos
+  tasks:
+  - name: pacotes base
+    yum:
+      name: "{{ item }}"
+      state: present
+    with_items:
+    - vim
+    - htop
+    - git
+    - sysstat
+    - nmap
+    - nginx
+
+  - name: Removendo pacotes dependentes
+    yum: 
+      name: "{{ item }}"
+      state: absent
+    with_items:
+    - docker
+    - docker-client
+    - docker-client-latest
+    - docker-common
+    - docker-latest
+    - docker-latest-logrotate
+    - docker-logrotate
+    - docker-selinux
+    - docker-engine-selinux
+    - docker-engine
+
+  - name: Instalando deps for docker
+    yum:
+      name: "{{ item }}"
+      state: present
+    with_items:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+
+  - name: Baixando repositorio.
+    get_url:
+      url: https://download.docker.com/linux/centos/docker-ce.repo
+      dest: /etc/yum.repos.d/docker.repo
+
+  - name: Instalando o docker
+    yum:
+      name: docker-ce
+      state: present
+
+  - name: Iniciando nginx
+    service:
+      name: "{{ item }}"
+      state: restarted
+    with_items:
+    - nginx
+    - docker
+
