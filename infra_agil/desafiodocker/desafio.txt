@@ -1,0 +1,6 @@
+Criar um docker file Centos7
+Fazer git clone da aplicacao https://github.com/AlissonMMenezes/php-openshift.git
+Salvar em /opt/app
+Executar a aplicacao usando o comando php -S
+Criar uma imagem baseado no dockerfile com o nome php_app
+Criar im docker-compose.yml que faz o deploy da imagem ouvindo a porta 8080 do host para 8080 do container

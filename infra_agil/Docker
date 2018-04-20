@@ -1,0 +1,193 @@
+##################### AULA 1
+
+docker logs + ID 6f219f633c07
+docker run -ti --name teste ubuntu #-ti server para tty / interactive
+docker run -ti --name teste ubuntu /bin/bash #-ti server para tty / interactive
+
+ctrl + p + q #Sai do container sem matar o processo.
+
+docker run -ti --name teste ubuntu /bin/bash
+
+docker run -ti --name teste ubuntu /bin/bash
+
+docker history + imagem #Mostra o historico que foi executado para subir essa imagem.
+
+#Fazer backup da imagem
+docker save apache:v4 > apache.tar.gz
+
+#Fazer restore da imagem
+docker load -i apache.tar.gz
+
+#Rodar o container liberando o terminal (Opcao -d)
+docker run -dti --name app2 apache:v4 apachectl -DFOREGROUND
+
+# Mostra informacoes do container
+docker inspect app2
+
+#Conecta no container
+docker run -ti --name teste ubuntu /bin/bash
+
+#Parar containers
+docker stop + containers
+
+#Parar todos os containers
+docker stop $(docker ps -a -q)
+
+#Remover todos os containers
+docker rm $(docker ps -a -q)
+
+#Redirect de portas:
+run -dti --name python2 -p 80:8080 python:v1 python /opt/python-openshift/app.py
+
+[root@dev1 docker]# iptables -L -n -e
+iptables v1.4.21: unknown option "-e"
+Try `iptables -h' or 'iptables --help' for more information.
+[root@dev1 docker]# iptables -L -n  -t nat
+Chain PREROUTING (policy ACCEPT)
+target     prot opt source               destination         
+DOCKER     all  --  0.0.0.0/0            0.0.0.0/0            ADDRTYPE match dst-type LOCAL
+
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+DOCKER     all  --  0.0.0.0/0           !127.0.0.0/8          ADDRTYPE match dst-type LOCAL
+
+Chain POSTROUTING (policy ACCEPT)
+target     prot opt source               destination         
+MASQUERADE  all  --  192.168.0.0/24       0.0.0.0/0           
+MASQUERADE  all  --  172.17.0.0/16        0.0.0.0/0           
+MASQUERADE  tcp  --  172.17.0.2           172.17.0.2           tcp dpt:8080
+
+Chain DOCKER (2 references)
+target     prot opt source               destination         
+RETURN     all  --  0.0.0.0/0            0.0.0.0/0           
+RETURN     all  --  0.0.0.0/0            0.0.0.0/0           
+DNAT       tcp  --  0.0.0.0/0            0.0.0.0/0            tcp dpt:80 to:172.17.0.2:8080
+
+# Listar network para o docker
+docker network ls
+
+#Criar network para o docker
+docker network create infraagil --subnet 192.168.0.0/24
+
+# Remover nework para o docker
+docker network rm infraagil
+
+[root@dev1 docker]# docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+394f83839f53        bridge              bridge              local
+32b24bd18344        host                host                local
+699749bbbaff        infraagil           bridge              local
+e1b3437ab39f        none                null                local
+
+#Subindo container com rede criada:
+docker run -dti --name python2 -p 80:8080 --net infraagil --ip 192.168.0.10 python:v1 python /opt/python-openshift/app.py
+
+##### DESAFIO
+
+Criar um container com Centos7
+Instalar o php
+Criar uma index com esse conte[udo: <?php echo "Desafio Docker"; ?>
+
+Gerar uma imagem chamada php e executar o container com o comando php -S 0.0.0.0:8080 e mapear a porta 80 do host para a 8080 do container.
+
+
+# Gerando a imagem
+docker commit desafio desafio:v1
+[root@dev1 ~]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
+desafio             v1                  00022ecd333c        About a minute ago   352MB
+python              v1                  144bb04f7d26        About an hour ago    469MB
+apache              v4                  9d303308c642        2 hours ago          257MB
+ubuntu              latest              c9d990395902        4 days ago           113MB
+centos              latest              e934aafc2206        10 days ago          199MB
+[root@dev1 ~]# 
+
+[root@dev1 ~]# docker run -dti --name desafio desafio:v1 php -S 0.0.0.0:8080
+3284d48bfbedaa0cf25bf95ab7d797619a43711d7e95a027528ebe9a249b0fe9
+[root@dev1 ~]# 
+
+[root@dev1 ~]# docker ps
+CONTAINER ID        IMAGE               COMMAND                 CREATED             STATUS              PORTS               NAMES
+3284d48bfbed        desafio:v1          "php -S 0.0.0.0:8080"   18 seconds ago      Up 17 seconds                           desafio
+
+[root@dev1 ~]# docker stop desafio
+desafio
+[root@dev1 ~]#
+
+# Conectar no container
+docker exec -ti desafio /bin/bash
+
+##################### AULA 2
+
+[root@dev1 ~]# mkdir auladocker
+[root@dev1 ~]# cd auladocker/
+
+# Criando Dockerfile
+[root@dev1 auladocker]# vim Dockerfile
+
+	FROM ubuntu
+	MAINTAINER rodolfosouzasp@gmail.com
+
+	RUN apt clean
+	RUN apt update
+	RUN apt install git python python-pip -y
+	RUN git clone https://github.com/AlissonMMenezes/python-openshift.git /opt/app
+	RUN pip install -r /opt/app/requirements.txt
+	RUN apt clean all
+
+	ENTRYPOINT ["python","/opt/app/app.py"]
+
+# Criando imagem a partir do Docker file
+[root@dev1 auladocker]# docker build . -t python_app
+
+### Baixando docker compose:
+
+# sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+
+# chmod +x /usr/local/bin/docker-compose
+# docker-compose --version
+# vim docker-compose.yml
+
+##################### DESAFIO 2
+Criar um docker file Centos7
+Fazer git clone da aplicacao https://github.com/AlissonMMenezes/php-openshift.git
+Salvar em /opt/app
+Executar a aplicacao usando o comando php -S
+Criar uma imagem baseado no dockerfile com o nome php_app
+Criar im docker-compose.yml que faz o deploy da imagem ouvindo a porta 8080 do host para 8080 do container
+
+
+[root@dev1 ~]# mkdir desafiodocker
+[root@dev1 ~]# cd desafiodocker/
+
+# Criando Dockerfile
+[root@dev1 auladocker]# vim Dockerfile
+
+	FROM centos
+	MAINTAINER rodolfosouzasp@gmail.com
+
+	RUN yum clean all
+	RUN yum install git php -y
+	RUN git clone https://github.com/AlissonMMenezes/php-openshift.git /opt/app
+	RUN yum clean all
+
+	ENTRYPOINT ["php -S 0.0.0.0:8080","/opt/app/index.php"]
+
+# Criando imagem a partir do Docker file
+[root@dev1 auladocker]# docker build . -t php_app
+
+#Para executar sem buscar cache
+docker build . -t php_app --no-cache 
+
+### Baixando docker compose:
+
+# sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+
+# chmod +x /usr/local/bin/docker-compose
+# docker-compose --version
+# vim docker-compose.yml
+
+

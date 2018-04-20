@@ -1,0 +1,56 @@
+---
+- name: Garantindo Configuracao em DEV.
+  hosts: DEV
+  tasks:
+    # instalar 2 pacotes - soa: apache2 e php7
+    # habilitar o modulo do php: a2enmod php
+    # colocar um index.php dentro de /var/www/html/ com o conteudo "Hello PHP!"
+    # <? echo "hello PHP!"; ?>
+    # Dar um restart no Apache
+
+#    - name: Instalando Apache
+#      apt:
+#        name: apache2
+#        state: present
+#    
+#    - name: Instalando PHP7
+#      apt:
+#        name: php7.0
+#        state: present
+#
+#    - name: Instalando Lib PHP-Mod-php7.0
+#      apt:
+#        name: libapache2-mod-php7.0
+#        state: present
+#      notify: Reiniciando o Apache
+
+### FORMA 2
+    - name: Instalando Pacotes LAMP no Centos
+      yum: name={{item}} state=present
+      with_items:
+      - httpd
+      when: ansible_distribution == "CentOS"
+      notify: Reiniciando o Httpd
+
+    - name: Instalando Pacotes LAMP no Ubuntu
+      apt: name={{item}} state=present
+      with_items:
+      - apache2
+      when: ansible_distribution == "Ubuntu"
+      #notify: Reiniciando o Apache
+
+    - name: Colocando Hello World
+      #shell: echo "<?php echo 'Hello PHP!'; ?>" > /var/www/html/index.php
+      copy:
+        src: files/index.php
+        dest: /var/www/html/index.php
+
+  handlers:
+    - name: Reiniciando o Apache
+      service:
+        name: apache
+        state: restarted
+    - name: Reiniciando o Httpd
+      service:
+        name: httpd
+        state: restarted

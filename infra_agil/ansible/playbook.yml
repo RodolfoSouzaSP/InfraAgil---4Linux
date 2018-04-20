@@ -1,0 +1,40 @@
+---
+#- name: Modificando DEV
+#  hosts: DEV
+#  tasks:
+#    - name: Verifcando o hostname das maquinas.
+#      command: hostname
+
+#    - name: Verificando o ip das maquinas.
+#      command: ip a show enp0s8
+
+#    - name: Verificando Uptime do host.
+#      command: uptime
+
+- name: Garantindo Configuracao em DEV.
+  hosts: DEV
+  tasks:
+    - name: Garantindo user developer nos hosts.
+      #user: name=developer state=present #Informa
+      user:
+        name: developer
+        state: absent #Informa
+
+    - name: Instalando Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Colocando Ola Mundo no Apache - Hello World
+      shell: echo Ola Mundo > /var/www/html/index.html
+      notify: Reiniciando o Apache
+
+    - name: Colocando o python
+      shell: echo Testando > /var/www/html/index.html
+      notify: Reiniciando o Apache
+
+  handlers:
+    - name: Reiniciando o Apache
+      service:
+        name: apache2
+        state: restarted

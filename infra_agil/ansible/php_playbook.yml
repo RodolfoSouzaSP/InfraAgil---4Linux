@@ -1,0 +1,49 @@
+---
+- name: Garantindo Configuracao em PROD.
+  hosts: DEV
+  tasks:
+    # instalar 2 pacotes - soa: apache2 e php7
+    # habilitar o modulo do php: a2enmod php
+    # colocar um index.php dentro de /var/www/html/ com o conteudo "Hello PHP!"
+    # <? echo "hello PHP!"; ?>
+    # Dar um restart no Apache
+
+#    - name: Instalando Apache
+#      apt:
+#        name: apache2
+#        state: present
+#    
+#    - name: Instalando PHP7
+#      apt:
+#        name: php7.0
+#        state: present
+#
+#    - name: Instalando Lib PHP-Mod-php7.0
+#      apt:
+#        name: libapache2-mod-php7.0
+#        state: present
+#      notify: Reiniciando o Apache
+
+### FORMA 2
+    - name: Instalando Pacotes LAMP
+      apt: name={{item}} state=present
+      with_items:
+      - apache2
+      - php7.0
+      - libapache2-mod-php7.0
+
+    - name: Habilitando Modulo php
+      command: a2enmod php7.0
+
+    - name: Colocando Hello World
+      #shell: echo "<?php echo 'Hello PHP!'; ?>" > /var/www/html/index.php
+      copy:
+        src: files/index.php
+        dest: /var/www/html/index.php
+      notify: Reiniciando o Apache
+
+  handlers:
+    - name: Reiniciando o Apache
+      service:
+        name: apache2
+        state: restarted
