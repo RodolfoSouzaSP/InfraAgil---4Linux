@@ -1,0 +1,8 @@
+puppet agent --test --server ubuntu1.salas4linux.com.brpuppet agent --test --server ubuntu1.salas4linux.com.br
+	Info: Caching certificate for ca
+	Info: csr_attributes file loading from /etc/puppetlabs/puppet/csr_attributes.yaml
+	Info: Creating a new SSL certificate request for ubuntu2.salas4linux.com.br
+	Info: Certificate Request fingerprint (SHA256): C8:25:12:78:AA:06:41:CD:E0:0C:D5:15:2B:BE:24:71:C2:29:F9:32:FC:DD:2E:AA:A6:E0:5F:D3:0C:A8:64:0D
+	Info: Caching certificate for ca
+	Exiting; no certificate found and waitforcert is disabled
+

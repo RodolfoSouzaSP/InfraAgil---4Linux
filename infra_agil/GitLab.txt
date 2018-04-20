@@ -1,0 +1,54 @@
+== Git Lab ==
+Gerrit code review
+# Ferramenta para demais desenvolvedores opnarem no codigo.
+
+Link para download: https://about.gitlab.com/installation/
+
+Instalacao via puppet
+#pdk new module puppet-gitlab
+
+class gitlab{
+
+  $pacotes = ["curl", "openssh-server", "ca-certificates", "postfix"]
+
+  service {"nginx":
+    ensure => stopped,
+    enable => false
+  }
+  ->
+  package {$pacotes:
+    ensure => present
+  }
+  ->
+  exec {"baixar_script":
+    command => "/usr/bin/wget https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh -O /tmp/script.sh"
+  }
+  ->
+  exec {"executar_script":
+    command => "/bin/bash /tmp/script.sh"
+  }
+  ->
+  package {"gitlab-ce":
+    ensure => present
+  }
+}
+
+### Configure o GITLAB apos instalacao.
+# gitlab-ctl reconfigure
+
+# gitlab-ctl status
+run: gitaly: (pid 24422) 81s; run: log: (pid 23300) 121s
+run: gitlab-monitor: (pid 24438) 80s; run: log: (pid 23477) 113s
+run: gitlab-workhorse: (pid 24410) 81s; run: log: (pid 23218) 134s
+run: logrotate: (pid 23255) 127s; run: log: (pid 23254) 127s
+run: nginx: (pid 23227) 133s; run: log: (pid 23226) 133s
+run: node-exporter: (pid 23461) 115s; run: log: (pid 23460) 115s
+run: postgres-exporter: (pid 24473) 79s; run: log: (pid 24272) 95s
+run: postgresql: (pid 22185) 178s; run: log: (pid 22184) 178s
+run: prometheus: (pid 24458) 80s; run: log: (pid 23833) 101s
+run: redis: (pid 22122) 184s; run: log: (pid 22121) 184s
+run: redis-exporter: (pid 23497) 107s; run: log: (pid 23496) 107s
+run: sidekiq: (pid 23200) 140s; run: log: (pid 23199) 140s
+run: unicorn: (pid 23161) 146s; run: log: (pid 23160) 146s
+
+

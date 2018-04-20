@@ -1,0 +1,443 @@
+root@ubuntu1:~# history 
+    1  apt install python python-pip
+    2  pip install ansible
+    3  ansible --version
+    4  cd 
+    5  ls -la
+    6  cd .ssh/
+    7  ls -la
+    8  ssh-keygen
+    9  ssh-copy-id root@localhost
+   10  cat id_rsa.pub >> authorized_keys 
+   11  cat authorized_keys 
+   12  ssh root@localhost uptime
+   13  ls -l
+   14  cd
+   15  ls -l
+   16  ls -la
+   17  vim inventario
+   18  ansible -i inventario PROD -m command -a "uptime"
+   19  ansible -i inventario PROD -m command -a "ls -l"
+   20  ansible -i inventario PROD -m command -a "who"
+   21  ansible -i inventario PROD -m command -a "whoami"
+   22  cat .ssh/id_rsa.pub 
+   23  cd
+   24  vim inventario 
+   25  ansible -i inventario PROD -m command -a "hostname"
+   26  cd
+   27  ansible -i inventario PROD -m command -a "hostname"
+   28  cat inventario 
+   29  ssh 192.168.201.63
+   30  ansible -i inventario PROD -m command -a "hostname"
+   31  ssh 192.168.201.87
+   32  ssh 192.168.201.127
+   33  ansible -i inventario DEV -m command -a "hostname"
+   34  ansible -i inventario all -m command -a "hostname"
+   35  vim playbook.yml
+   36  ansible-playbook -i inventario playbook.yml 
+   37  ansible-playbook -i inventario playbook.yml -vvvvvvvvvv
+   38  ansible-playbook -i inventario playbook.yml -v
+   39  vim playbook.yml
+   40  ansible-playbook -i inventario playbook.yml -vvvvvvvv
+   41  ansible-playbook -i inventario playbook.yml
+   42  vim playbook.yml
+   43  ansible-playbook -i inventario playbook.yml
+   44  cd
+   45  ansible-playbook -i inventario playbook.yml
+   46  ssh 192.168.201.127 getent passwd developer
+   47  ansible -i inventario dev -m command -a "getent passwd developer"
+   48  ls
+   49  ansible -i inventario DEV -m command -a "getent passwd developer"
+   50  vim playbook.yml 
+   51  ansible-playbook -i inventario playbook.yml
+   52  vim playbook.yml 
+   53  ansible-playbook -i inventario playbook.yml
+   54  curl 192.168.201.87
+   55  curl 192.168.201.127
+   56  vim playbook.yml 
+   57  curl 192.168.201.127
+   58  ansible-playbook -i inventario playbook.yml
+   59  curl 192.168.201.127
+   60  curl 192.168.201.87
+   61  vim playbook.yml 
+   62  ansible-playbook -i inventario playbook.yml
+   63  vim playbook.yml 
+   64  ansible-playbook -i inventario playbook.yml
+   65  vim playbook.yml 
+   66  ansible-playbook -i inventario playbook.yml
+   67  curl 192.168.201.87
+   68  curl 192.168.201.127
+   69  exit
+   70  cd
+   71  ls
+   72  vim playbook.yml 
+   73  cp playbook.yml php_playbook.yml
+   74  vim php_playbook.yml 
+   75  apt-cache php7
+   76  apt-cache search php7
+   77  vim php_playbook.yml 
+   78  vim inventario 
+   79  vim php_playbook.yml 
+   80  history 
+   81  vim php_playbook.yml 
+   82  vim inventario 
+   83  vim php_playbook.yml 
+   84  ansible-playbook -i inventario php_playbook.yml
+   85  cd
+   86  ansible-playbook -i inventario php_playbook.yml
+   87  vim php_playbook.yml 
+   88  curl 192.168.201.106
+   89  curl 192.168.201.63
+   90  vim php_playbook.yml 
+   91  vim /etc/apache2/apache2.conf 
+   92  vim php_playbook.yml 
+   93  ansible-playbook -i inventario php_playbook.yml
+   94  curl 192.168.201.63
+   95  vim /var/www/html/index.php 
+   96  vim php_playbook.yml 
+   97  vim playbook.yml 
+   98  vim php_playbook.yml 
+   99  ansible-playbook -i inventario php_playbook.yml
+  100  vim php_playbook.yml 
+  101  ansible-playbook -i inventario php_playbook.yml
+  102  a2enmod php7
+  103  dpkg -l php
+  104  dpkg -l php*
+  105  dpkg -l apache
+  106  dpkg -l |grep apache
+  107  vim php_playbook.yml 
+  108  ansible-playbook -i inventario php_playbook.yml
+  109  dpkg -l |grep apache
+  110  vim php_playbook.yml 
+  111  ansible-playbook -i inventario php_playbook.yml
+  112  vim php_playbook.yml 
+  113  curl 192.168.201.63
+  114  vim php_playbook.yml 
+  115  ansible-playbook -i inventario php_playbook.yml
+  116  curl 192.168.201.63
+  117  vim php_playbook.yml 
+  118  vim /var/www/html/index.html
+  119  vim php_playbook.yml 
+  120  ansible-playbook -i inventario php_playbook.yml
+  121  curl 192.168.201.63
+  122  vim /etc/apache2/apache2.conf 
+  123  vim php_playbook.yml 
+  124  ansible-playbook -i inventario php_playbook.yml
+  125  curl 192.168.201.63
+  126  vim php_playbook.yml 
+  127  ansible-playbook -i inventario php_playbook.yml
+  128  vim php_playbook.yml 
+  129  ansible-playbook -i inventario php_playbook.yml
+  130  vim php_playbook.yml 
+  131  ansible-playbook -i inventario php_playbook.yml
+  132  vim php_playbook.yml 
+  133  ansible-playbook -i inventario php_playbook.yml
+  134  vim php_playbook.yml 
+  135  vim /var/www/html/index.php 
+  136  cd /var/www/html/
+  137  ls -l
+  138  mv index.html /tmp
+  139  ls -l
+  140  curl 192.168.201.106
+  141  ls -l
+  142  curl 192.168.201.106
+  143  ls -l
+  144  curl 192.168.201.106
+  145  vim /var/www/html/index.php 
+  146  vim php_playbook.yml 
+  147  cd -
+  148  vim php_playbook.yml 
+  149  ansible-playbook -i inventario php_playbook.yml
+  150  curl 192.168.201.106
+  151  vim php_playbook.yml 
+  152  service apache2 reload
+  153  curl 192.168.201.106
+  154  ansible-playbook -i inventario php_playbook.yml
+  155  curl 192.168.201.106
+  156  vim php_playbook.yml 
+  157  ansible-playbook -i inventario php_playbook.yml
+  158  curl 192.168.201.106
+  159  vim php_playbook.yml 
+  160  mkdir files
+  161  touch index.php
+  162  mv index.php files/
+  163  vim files/index.php 
+  164  ansible-playbook -i inventario php_playbook.yml
+  165  vim files/index.php 
+  166  vim php_playbook.yml 
+  167  curl 192.168.201.106
+  168  ls
+  169  mkdir roles
+  170  cd roles/
+  171  ls
+  172  ansible-galaxy init puppet
+  173  cd puppet/
+  174  ls -ltr
+  175  cd tasks/
+  176  ls -ltr
+  177  vim main.yml 
+  178  vim prerequisitos.yml
+  179  vim ../../../php_playbook.yml 
+  180  vim prerequisitos.yml
+  181  vim install_puppet.yml
+  182  vim prerequisitos.yml
+  183  ls -l
+  184  vim main.yml 
+  185  ansible-playbook -i /root/inventario main.yml
+  186  ls /tmp
+  187  vim install_puppet.yml
+  188  ansible-playbook -i /root/inventario main.yml
+  189  dpkg -l puppet
+  190  dpkg -l |grep puppet
+  191  vim install_puppet.yml 
+  192  cat /etc/profile
+  193  ansible-playbook -i /root/inventario main.yml
+  194  cat /etc/profile
+  195  source /etc/profile
+  196  puppet --version
+  197  puppet resource user
+  198  puppet resource user developer
+  199  puppet resource user developer ensure=present
+  200  puppet resource user developer
+  201  puppet resource packege
+  202  puppet resource package
+  203  puppet resource package apache2
+  204  puppet resource service apache2
+  205  puppet resource service apache2 ensure=stopped
+  206  puppet resource service apache2
+  207  systemctl status apache2
+  208  puppet resource service apache2 ensure=running
+  209  puppet resource package apache2 ensure=absent
+  210  dpkg -l |grep apache
+  211  dpkg -l |grep apache2
+  212  systemctl statua apache2
+  213  systemctl status apache2
+  214  puppet resource package nginx ensure=present
+  215  puppet resource service nginx
+  216  ss -ntpl
+  217  netstat -ntpl
+  218  curl localhost
+  219  service apache2 status
+  220  dpkg -l apache2
+  221  service apache2 status
+  222  puppet resource user developer password=4linux
+  223  puppet resource user developer
+  224  c
+  225  cd
+  226  ls
+  227  mkdir puppet_aula
+  228  cd puppet_aula/
+  229  vim lamp.pp
+  230  puppet resource package nginx
+  231  vim lamp.pp
+  232  systemctl status nginx
+  233  systemctl stop\ nginx
+  234  systemctl stop nginx
+  235  systemctl status nginx
+  236  systemctl status apache2
+  237  systemctl start apache2
+  238  service apache2 status
+  239  service apache2 start
+  240  dpkg -l |grep apache
+  241  dpkg -l |grep nginx
+  242  vim lamp.pp
+  243  curl localhost
+  244  ss -ntpl
+  245  puppet apply lamp.pp 
+  246  ss -ntpl
+  247  curl localhost
+  248  vim lamp.pp
+  249  puppet apply lamp.pp 
+  250  curl localhost
+  251  curl localhost/index.php
+  252  vim lamp.pp 
+  253  puppet apply lamp.pp 
+  254  curl localhost/index.php
+  255  service apache2 stop
+  256  apt remove apache2 php7.0
+  257  apt install nginx
+  258  service nginx start
+  259  service nginx status
+  260  netstat -ntpl
+  261  ss -ntpl
+  262  curl localhost
+  263  puppet apply lamp.pp 
+  264  curl localhost
+  265  exit
+  266  ansible --version
+  267  cd
+  268  ip a
+  269  vim inventario 
+  270  ping 192.168.201.141
+  271  ssh 192.168.201.141 -c "ip a"
+  272  ssh 192.168.201.141 -c ip a
+  273  ssh 192.168.201.141 -exec "ip a"
+  274  ssh 192.168.201.141 --exec "ip a"
+  275  ssh 192.168.201.141 | exec "ip a"
+  276  ansible --version
+  277  cd
+  278  ip a
+  279  vim inventario 
+  280  ping 192.168.201.141
+  281  ssh 192.168.201.141 -c "ip a"
+  282  ssh 192.168.201.141 -c ip a
+  283  ssh 192.168.201.141 -exec "ip a"
+  284  ssh 192.168.201.141 --exec "ip a"
+  285  ssh 192.168.201.141 | exec "ip a"
+  286  ls
+  287  cd
+  288  vim php_centos_playbook.yml 
+  289  exit
+  290  ansible -i inventario all -m command -a "hostname"
+  291  cd
+  292  ansible -i inventario all -m command -a "hostname"
+  293  cat inventario 
+  294  ssh 192.168.201.63
+  295  ssh 192.168.201.59
+  296  ssh 192.168.201.141
+  297  ansible -i inventario all -m command -a "hostname"
+  298  ls -l
+  299  ls -la
+  300  rm php_playbook.retry
+  301  vim php_playbook.yml 
+  302  ansible-playbook -i inventario php_playbook.yml 
+  303  cp php_playbook.yml php_centos_playbook.yml
+  304  vim php_centos_playbook.yml 
+  305  ansible-playbook -i inventario php_playbook.yml 
+  306  vim php_centos_playbook.yml 
+  307  ansible-playbook -i inventario php_playbook.yml 
+  308  vim php_playbook.yml 
+  309  vim php_centos_playbook.yml 
+  310  ansible-playbook -i inventario php_centos_playbook.yml
+  311  curl 192.168.201.141
+  312  curl 192.168.201.59
+  313  vim php_centos_playbook.yml 
+  314  ssh 192.168.201.59
+  315  vim php_centos_playbook.yml 
+  316  ansible -i inventario DEV -m command -a "rpm -qi httpd"
+  317  vim php_centos_playbook.yml 
+  318  ansible-playbook -i inventario php_centos_playbook.yml
+  319  vim php_centos_playbook.yml 
+  320  ansible-playbook -i inventario php_centos_playbook.yml
+  321  vim php_centos_playbook.yml 
+  322  ansible-playbook -i inventario php_centos_playbook.yml
+  323  vim php_centos_playbook.yml 
+  324  ansible-playbook -i inventario php_centos_playbook.yml
+  325  vim php_centos_playbook.yml 
+  326  ansible-playbook -i inventario php_centos_playbook.yml
+  327  :q
+  328  vim php_centos_playbook.yml 
+  329  ansible-playbook -i inventario php_centos_playbook.yml
+  330  vim php_centos_playbook.yml 
+  331  ansible-playbook -i inventario php_centos_playbook.yml
+  332  vim php_centos_playbook.yml 
+  333  ansible-playbook -i inventario php_centos_playbook.yml
+  334  vim php_centos_playbook.yml 
+  335  ansible-playbook -i inventario php_centos_playbook.yml
+  336  vim php_centos_playbook.yml 
+  337  ansible-playbook -i inventario php_centos_playbook.yml
+  338  vim php_centos_playbook.yml 
+  339  ansible-playbook -i inventario php_centos_playbook.yml
+  340  vim php_centos_playbook.yml 
+  341  ansible-playbook -i inventario php_centos_playbook.yml
+  342  vim php_centos_playbook.yml 
+  343  ansible-playbook -i inventario php_centos_playbook.yml
+  344  vim php_centos_playbook.yml 
+  345  ansible-playbook -i inventario php_centos_playbook.yml
+  346  vim php_centos_playbook.yml 
+  347  vim php_centos_playbook.yml
+  348  ansible-playbook -i inventario php_centos_playbook.yml
+  349  vim php_centos_playbook.yml
+  350  ansible-playbook -i inventario php_centos_playbook.yml
+  351  vim php_centos_playbook.yml
+  352  ansible-playbook -i inventario php_centos_playbook.yml
+  353  vim php_centos_playbook.yml
+  354  ansible-playbook -i inventario php_centos_playbook.yml
+  355  vim php_centos_playbook.yml
+  356  vim php_playbook.yml
+  357  vim php_centos_playbook.yml
+  358  ansible-playbook -i inventario php_centos_playbook.yml
+  359  vim php_centos_playbook.yml
+  360  ansible-playbook -i inventario php_centos_playbook.yml
+  361  ls roles/puppet/tasks/
+  362  cd roles/puppet/tasks/prerequisitos.yml 
+  363  vim roles/puppet/tasks/prerequisitos.yml 
+  364  ls /tmp/puppet.rp
+  365  ls /tmp/puppet.
+  366  ls /tmp/puppet.*
+  367  ls /tmp
+  368  ls -l
+  369  cd /tmp
+  370  ls
+  371  cd -
+  372  cd roles/puppet/tasks/prerequisitos.yml 
+  373  vim roles/puppet/tasks/prerequisitos.yml 
+  374  cd roles/puppet/tasks/
+  375  ls
+  376  cd ..
+  377  ls -l
+  378  cd tasks/
+  379  ls -l
+  380  vim install_puppet.yml 
+  381  ls
+  382  vim prerequisitos.yml 
+  383  vim install_puppet.yml 
+  384  ls
+  385  vim main.
+  386  vim main.yml 
+  387  ls
+  388  cd ..
+  389  ls -ltr
+  390  cd defaults/
+  391  ls
+  392  vim main.yml 
+  393  ls -l
+  394  cd ..
+  395  ls
+  396  cd handlers/
+  397  ls
+  398  vim main.yml 
+  399  cd ..
+  400  ls
+  401  cd tests/
+  402  ls
+  403  vim test.yml 
+  404  cd ../tasks/
+  405  ls -ltr
+  406  history |grep puppet
+  407  history |grep ansible
+  408  vim main.yml 
+  409  ansible-playbook -i /root/inventario main.yml
+  410  vim prerequisitos.yml 
+  411  ansible-playbook -i /root/inventario main.yml
+  412  vim prerequisitos.yml 
+  413  vim install_puppet.yml 
+  414  ansible-playbook -i /root/inventario main.yml
+  415  vim prerequisitos.yml 
+  416  ansible-playbook -i /root/inventario main.yml
+  417  vim prerequisitos.yml 
+  418  ansible-playbook -i /root/inventario main.yml
+  419  vim prerequisitos.yml 
+  420  vim main.yml 
+  421  ansible-playbook -i /root/inventario main.yml
+  422  vim main.yml 
+  423  vim prerequisitos.yml 
+  424  vim main.yml 
+  425  ansible-playbook -i /root/inventario main.yml
+  426  vim main.yml 
+  427  vim prerequisitos.yml 
+  428  ansible-playbook -i /root/inventario main.yml
+  429  vim prerequisitos.yml 
+  430  ansible-playbook -i /root/inventario main.yml
+  431  vim prerequisitos.yml 
+  432  ansible-playbook -i /root/inventario main.yml
+  433  vim prerequisitos.yml 
+  434  ls
+  435  vim install_puppet.yml 
+  436  vim main.
+  437  vim main.yml 
+  438  ansible-playbook -i /root/inventario main.yml
+  439  vim prerequisitos.yml 
+  440  ansible-playbook -i /root/inventario main.yml
+  441  vim install_puppet.yml 
+  442  ansible-playbook -i /root/inventario main.yml

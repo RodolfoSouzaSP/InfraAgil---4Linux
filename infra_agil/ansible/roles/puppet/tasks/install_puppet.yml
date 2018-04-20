@@ -1,0 +1,20 @@
+---
+- name: Instalando o puppet .deb
+  apt:
+    name: puppet-agent
+    state: present
+    update_cache: yes #Realizada apt update
+  when: ansible_distribution == "Ubuntu" 
+
+- name: Instalando o puppet .rpm
+  yum:
+    name: puppet-agent
+    state: present
+    update_cache:
+  when: ansible_distribution == "CentOS"
+
+- name: Colocando puppet na variavel PATH
+  lineinfile:
+    path: /etc/profile
+    line: "export PATH=$PATH:/opt/puppetlabs/bin/"
+    create: yes
